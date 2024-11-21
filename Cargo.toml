@@ -2,6 +2,11 @@
 name = "prng_split"
 version = "0.1.0"
 edition = "2021"
+license = "GNU AGPLv3"
+authors = ["Wayne Van Son"]
+description = "A subset of the split commmand with a prng seeded from input for deterministic output"
+repository = "https://github.com/waynevanson/prng_split"
+keywords = ["split", "file", "encoder", "cli", "lib"]
 
 [dependencies]
 log = { version = "0.4.22" }
