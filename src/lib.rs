@@ -1,3 +1,5 @@
+//! Split a single input into multiple files.
+
 mod alpha_path;
 mod encoder;
 mod range_from_str;
