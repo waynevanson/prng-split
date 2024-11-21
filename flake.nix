@@ -75,7 +75,7 @@
         common = environment // {inherit nativeBuildInputs buildInputs shellHook;};
 
         main = naersk'.buildPackage {
-          name = "range-split";
+          name = "prng_split";
           version = "0.0.0";
           src = ./.;
         };
