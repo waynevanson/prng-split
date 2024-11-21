@@ -2,7 +2,7 @@ use anyhow::Result;
 use bytesize::ByteSize;
 use clap::Parser;
 use clap_verbosity_flag::Verbosity;
-use range_split::{try_from_str, FileSplitEncoder};
+use prng_split::{try_from_str, FileSplitEncoder};
 use rangetools::BoundedRange;
 use std::{fs::File, io::Read, ops::Range, path::PathBuf};
 
