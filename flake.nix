@@ -47,20 +47,10 @@
           clang
           codebase'
           llvmPackages.bintools
-          openssl
-          openssl.dev
-          pkg-config
           rust'
           rust-analyzer-nightly
         ];
-        buildInputs = with pkgs; [
-          openssl
-          pkg-config
-          docker
-          docker-compose
-          gnutar
-          xz
-        ];
+        buildInputs = with pkgs; [];
 
         environment = {
           LIBCLANG_PATH = pkgs.lib.makeLibraryPath [
@@ -84,39 +74,19 @@
         '';
         common = environment // {inherit nativeBuildInputs buildInputs shellHook;};
 
-        elevated-cycling = {
-          cli = naersk'.buildPackage {
-            name = "elevated-cycling-cli";
-            version = "0.0.0";
-            src = ./.;
-            cargoBuildArgs = args: args ++ ["--bin elevated-cycling"];
-          };
-        };
-
-        range-split = naersk'.buildPackage {
+        main = naersk'.buildPackage {
           name = "range-split";
           version = "0.0.0";
           src = ./.;
-          cargoBuildArgs = args: args ++ ["--bin range-split"];
         };
 
-        main = pkgs.dockerTools.buildImage {
-          name = "elevated-cycling";
-          tag = "latest";
-
-          contents = [elevated-cycling.cli];
-
-          config = {
-            Cmd = ["RUST_LOG=info" "/bin/elevated-cycling"];
-          };
-        };
         # wrapper = pkgs.writeWrapperShellScriptBin "docker-compose"
         # TODO: write an application that is the entrypoint to docker
         # Prod would usually mean prod databases and in the cloud.
         # We're never really going to prod.
         # Our dev is the cargo watch -x run --bin elevated-cycling <fiules>
       in {
-        packages.range-split = elevated-cycling.range-split;
+        packages.range-split = main;
         devShells.default = pkgs.mkShell common;
       }
     );
