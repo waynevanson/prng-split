@@ -1,5 +1,5 @@
 [package]
-name = "prng-split"
+name = "prng_split"
 version = "0.1.0"
 edition = "2021"
 
